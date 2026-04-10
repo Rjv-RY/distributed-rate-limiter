@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  redis:
+   image: redis:7-alpine
+   container_name: ratelimiter-redis
+   ports:
+    - "6622:6379"
+   command: redis-server --appendonly yes
+   volumes:
+    - redis-data:/data
+   healthcheck:
+    test: ["CMD", "redis-cli", "ping"]
+    interval: 5s
+    timeout: 3s
+    retries: 5
+
+  ratelimiter-1:
+   build: .
+   container_name: ratelimiter-server-1
+   ports:
+    - "8081:8080"
+   environment:
+    - SPRING_PROFILES_ACTIVE=distributed
+   depends_on:
+     redis:
+      condition: service_healthy
+
+  ratelimiter-2:
+   build: .
+   container_name: ratelimiter-server-2
+   ports:
+    - "8082:8080"
+   environment:
+    - SPRING_PROFILES_ACTIVE=distributed
+   depends_on:
+    redis:
+     condition: service_healthy
+
+volumes:
+   redis-data:

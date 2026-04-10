@@ -56,8 +56,7 @@ public class TokenBucketTest {
 		
 		Thread.sleep(1100);
 		
-		boolean allowed = rateLimiter.allowRequest(userId);
-		assertTrue(allowed, "request should be allowed after window reset");
+		assertTrue(rateLimiter.allowRequest(userId), "request should be allowed after window reset");
 	}
 	
 	@Test

@@ -15,6 +15,8 @@ public class RateLimitController {
 	
 	public RateLimitController(RateLimiter rateLimiter) {
 		this.rateLimiter = rateLimiter;
+		//debug log line to remove and definitely not forget
+		System.out.println("RateLimitController created with: " + rateLimiter.getClass().getName());
 	}
 	
 //    public RateLimitController(@Qualifier("tokenBucket") RateLimiter rateLimiter) {
@@ -23,6 +25,10 @@ public class RateLimitController {
 	
 	@GetMapping("/resource")
 	public ResponseEntity<String> getResource(@RequestHeader("X-User-ID") String userId){
+		
+		//debug log line to remove and definitely not forget
+		System.out.println("Request received for user: " + userId);
+		
 		if (rateLimiter.allowRequest(userId)) {
 			return ResponseEntity.ok("Request allowed.");
 		}

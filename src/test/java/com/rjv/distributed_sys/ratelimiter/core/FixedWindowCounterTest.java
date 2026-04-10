@@ -27,9 +27,8 @@ public class FixedWindowCounterTest {
 		//new user, 0 reqs
 		String userId = "alek";
 		
+		boolean allowed = rateLimiter.allowRequest(userId);
 		for (int i = 0; i < 10; i++) {
-			boolean allowed = rateLimiter.allowRequest(userId);
-			
 			assertTrue(allowed, "Request " + (i+1) + " should be allowed");
 		}
 	}
@@ -42,11 +41,8 @@ public class FixedWindowCounterTest {
 		for (int i = 0; i < 10; i++) {
 			rateLimiter.allowRequest(userId);
 		}
-		//on 11th request
-		boolean allowed = rateLimiter.allowRequest(userId);
-		
-		//blocked
-		assertFalse(allowed, "11th request should be blocked");
+		//on 11th request, blocked
+		assertFalse(rateLimiter.allowRequest(userId), "11th request should be blocked");
 	}
 	
 	@Test
@@ -69,9 +65,7 @@ public class FixedWindowCounterTest {
 		//wait lil more than 2 secs
 		Thread.sleep(2100);
 		
-		boolean allowed = rateLimiter.allowRequest(userId);
-		
-		assertTrue(allowed, "request should be allowed after window reset");
+		assertTrue(rateLimiter.allowRequest(userId), "request should be allowed after window reset");
 	}
 	
 	@Test
@@ -82,12 +76,10 @@ public class FixedWindowCounterTest {
 		}
 		
 		//bob requests
-		boolean bobAllowed = rateLimiter.allowRequest("bob");
-		assertTrue(bobAllowed, "Bob has own counter");
+		assertTrue(rateLimiter.allowRequest("bob"), "Bob has own counter");
 		
 		//alek still blocked
-		boolean alekAllowed = rateLimiter.allowRequest("alek");
-		assertFalse(alekAllowed, "Alek still blocked");
+		assertFalse(rateLimiter.allowRequest("alek"), "Alek still blocked");
 	}
 	
 	@Test

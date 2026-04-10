@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 
 import com.rjv.distributed_sys.ratelimiter.config.RateLimitConfig;
 
-@Component
-@Primary
+//@Primary
+@Component("tokenBucket")
 public class TokenBucket implements RateLimiter{
 	private final RateLimitConfig config;
 	private final Map<String, Bucket> buckets = new ConcurrentHashMap<>();
@@ -42,7 +42,7 @@ public class TokenBucket implements RateLimiter{
 		synchronized boolean tryConsume() {
 			refill();
 			
-			 System.out.println(String.format("Bucket has %.2f tokens", tokens));
+//			 System.out.println(String.format("Bucket has %.2f tokens", tokens));
 			
 			if (tokens >= 1) {
 				tokens -= 1;
