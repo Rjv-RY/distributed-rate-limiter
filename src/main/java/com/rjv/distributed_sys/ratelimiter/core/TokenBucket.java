@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 
 import com.rjv.distributed_sys.ratelimiter.config.RateLimitConfig;
 
-//@Primary
 @Component("tokenBucket")
 public class TokenBucket implements RateLimiter{
 	private final RateLimitConfig config;

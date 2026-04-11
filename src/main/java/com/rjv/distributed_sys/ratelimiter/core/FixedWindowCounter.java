@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import com.rjv.distributed_sys.ratelimiter.config.RateLimitConfig;
 import com.rjv.distributed_sys.ratelimiter.storage.CounterStorage;
 
-@Component
-@Primary
+@Component("fixedWindowCounter")
 public class FixedWindowCounter implements RateLimiter{
 	private final CounterStorage storage;
 	private final RateLimitConfig config;
@@ -18,7 +17,7 @@ public class FixedWindowCounter implements RateLimiter{
 	public FixedWindowCounter(CounterStorage storage, RateLimitConfig config) {
 		this.storage = storage;
 		this.config = config;
-		System.out.println("Using storage implementation: " + storage.getClass().getSimpleName());
+//		System.out.println("Using storage implementation: " + storage.getClass().getSimpleName());
 	}
 	
 	@Override
@@ -29,7 +28,7 @@ public class FixedWindowCounter implements RateLimiter{
 			config.getRequestsPerWindow(),
 			config.getWindowSeconds()
 		);
-		System.out.println("Rate limit check - User: " + userId + ", Allowed: " + result);
+//		System.out.println("Rate limit check - User: " + userId + ", Allowed: " + result);
 		return result;
 	}
 }

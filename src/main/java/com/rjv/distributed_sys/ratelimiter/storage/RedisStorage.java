@@ -21,7 +21,7 @@ public class RedisStorage implements CounterStorage {
     
     public RedisStorage(RedisTemplate<String, String> redisTemplate) {
         this.redisTemplate = redisTemplate;
-        System.out.println("RedisStorage created with RedisTemplate: " + redisTemplate);
+//        System.out.println("RedisStorage created with RedisTemplate: " + redisTemplate);
     }
     
     //increment hits o race conditions, is atomic
@@ -29,37 +29,37 @@ public class RedisStorage implements CounterStorage {
     //dual-level debugging logs hahahahahaha
     @Override
     public boolean allowRequest(String key, int limit, int windowSeconds) {
-    	System.out.println("RedisStorage.allowRequest called - Key: " + key);
+//    	System.out.println("RedisStorage.allowRequest called - Key: " + key);
     	
         long currentTime = System.currentTimeMillis();
         long windowStart = (currentTime / (windowSeconds * 1000)) * (windowSeconds * 1000);
         String windowKey = key + ":" + windowStart;
         
-        log.debug("checking rate limit for key: {}", windowKey);
+//        log.debug("checking rate limit for key: {}", windowKey);
         
         try {
         	
         	Long count = redisTemplate.opsForValue().increment(windowKey);
         	
             if (count == null) {
-            	log.error("Redis increment returned null for key: {}", windowKey);
+//            	log.error("Redis increment returned null for key: {}", windowKey);
                 return false;
             }
             
             if (count == 1) {
                 redisTemplate.expire(windowKey, windowSeconds, TimeUnit.SECONDS);
-                log.debug("Set expiration for key: {} ({} seconds)", windowKey, windowSeconds);
+//                log.debug("Set expiration for key: {} ({} seconds)", windowKey, windowSeconds);
             }
             
             boolean allowed = count <= limit;
-            log.debug("Key: {}, Count: {}, Limit: {}, Allowed: {}", windowKey, count, limit, allowed);
-            System.out.println("Redis check complete - Count: " + count + ", Allowed: " + allowed);
+//            log.debug("Key: {}, Count: {}, Limit: {}, Allowed: {}", windowKey, count, limit, allowed);
+//            System.out.println("Redis check complete - Count: " + count + ", Allowed: " + allowed);
             
             return allowed;
         	
         } catch (Exception e) {
-        	log.error("Redis error for key: {}", windowKey, e);
-        	System.err.println("Redis error: " + e.getMessage());
+//        	log.error("Redis error for key: {}", windowKey, e);
+//        	System.err.println("Redis error: " + e.getMessage());
         	return false;
         }        
     }
