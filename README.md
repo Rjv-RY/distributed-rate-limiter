@@ -4,7 +4,7 @@ A rate limiter written in Java 17 and SpringBoot 4 built on the principles I lea
 
 ### WIP.
 
-**Current Status:** Persistent Storage for usage of Tokens across sessions/instances of the application using Redis. Three algorithms/approaches to test.
+**Current Status:** Distributed Build: Persistent Storage for usage of Tokens across sessions/instances of the application using Redis. Three algorithms/approaches to test.
 
 ## Runing the app locally
 ```bash
@@ -13,7 +13,7 @@ A rate limiter written in Java 17 and SpringBoot 4 built on the principles I lea
 
 ## Testing (Running using Docker)
 
-Then:
+Distributed Test:
 - docker-compose down -v
 - mvn clean package -DskipTests (skip tests)
 - docker-compose up --build
