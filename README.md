@@ -6,7 +6,7 @@ A rate limiter written in Java 17 and SpringBoot 4 built on the principles I lea
 
 **Current Status:** Distributed Build: Persistent Storage for usage of Tokens across sessions/instances of the application using Redis. Three algorithms/approaches to test.
 
-## Testing (Distributed, and Degradation)
+## Testing (Distributed Build, and Degradation)
 Test Prerequisites:
 - Docker engine on desktop
 - A unix-based shell (or git bash/Cygwin/wsl if on windows)
