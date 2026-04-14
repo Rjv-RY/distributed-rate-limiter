@@ -41,8 +41,6 @@ public class TokenBucket implements RateLimiter{
 		synchronized boolean tryConsume() {
 			refill();
 			
-//			 System.out.println(String.format("Bucket has %.2f tokens", tokens));
-			
 			if (tokens >= 1) {
 				tokens -= 1;
 				return true;

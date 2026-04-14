@@ -17,7 +17,6 @@ public class FixedWindowCounter implements RateLimiter{
 	public FixedWindowCounter(CounterStorage storage, RateLimitConfig config) {
 		this.storage = storage;
 		this.config = config;
-//		System.out.println("Using storage implementation: " + storage.getClass().getSimpleName());
 	}
 	
 	@Override
@@ -28,7 +27,6 @@ public class FixedWindowCounter implements RateLimiter{
 			config.getRequestsPerWindow(),
 			config.getWindowSeconds()
 		);
-//		System.out.println("Rate limit check - User: " + userId + ", Allowed: " + result);
 		return result;
 	}
 }

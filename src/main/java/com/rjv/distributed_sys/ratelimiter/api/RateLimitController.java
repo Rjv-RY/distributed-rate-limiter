@@ -38,14 +38,7 @@ public class RateLimitController {
         this.latencyTimer = Timer.builder("ratelimiter.latency")
                 .description("Rate limiter check latency")
                 .register(meterRegistry);
-		
-		//debug log line to remove and definitely not forget
-//		System.out.println("RateLimitController created with: " + rateLimiter.getClass().getName());
 	}
-	
-//    public RateLimitController(@Qualifier("tokenBucket") RateLimiter rateLimiter) {
-//        this.rateLimiter = rateLimiter;
-//    }
 	
 	@GetMapping("/resource")
 	public ResponseEntity<String> getResource(@RequestHeader("X-User-ID") String userId){

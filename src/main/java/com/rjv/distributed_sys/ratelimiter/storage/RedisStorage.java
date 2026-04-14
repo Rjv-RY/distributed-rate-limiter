@@ -60,16 +60,4 @@ public class RedisStorage implements CounterStorage {
         	return false;
         }        
     }
-    
-//    @PostConstruct
-//    public void testConnection() {
-//        try {
-//            String pong = redisTemplate.getConnectionFactory()
-//                                       .getConnection()
-//                                       .ping();
-//            System.out.println("Redis ping from app: " + pong);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
 }

@@ -22,7 +22,6 @@ public class SlidingWindowLog implements RateLimiter{
 	public SlidingWindowLog(RedisTemplate<String, String> redisTemplate, RateLimitConfig config) {
 		this.redisTemplate = redisTemplate;
 		this.config = config;
-//		System.out.println("sliding window loaded");
 	}
 	
 	@Override
