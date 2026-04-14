@@ -42,3 +42,12 @@ spring.data.redis.host=localhost
 spring.data.redis.port=6379
 spring.data.redis.timeout=2000ms
 ratelimiter.storage.type=redis
+```
+
+## Metrics
+For metrics on number of requests allowed and denied:
+- http://localhost:8080/actuator/metrics/ratelimiter.requests.allowed
+- http://localhost:8080/actuator/metrics/ratelimiter.requests.denied
+
+For metrics on the app itself:
+- http://localhost:8080/actuator/prometheus
