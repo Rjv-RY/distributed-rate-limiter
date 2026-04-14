@@ -36,7 +36,7 @@ Edit `application.properties`:
 ratelimiter.default.requests-per-window=10
 ratelimiter.default.window-seconds=60
 # can switch to FIXED_WINDOW or TOKEN_BUCKET, Token Bucket is in-memory, Fixed Window supports graceful degradation.
-# check src/docks/ALGORITHM_COMPARISON.md for more insight
+# check src/docks/ALGORITHM_COMPARISON.md for more about those
 ratelimiter.default.algorithm=SLIDING_WINDOW 
 spring.data.redis.host=localhost
 spring.data.redis.port=6379
